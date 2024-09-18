@@ -1,0 +1,67 @@
+/* Importa as configurações base do Tailwind CSS, que inclui um reset de estilos e uma normalização para garantir consistência entre navegadores */
+@tailwind base;
+
+/* Importa os componentes do Tailwind CSS, que são classes utilitárias para construir layouts e componentes reutilizáveis */
+@tailwind components;
+
+/* Importa as utilidades do Tailwind CSS, que incluem classes de estilização e responsividade */
+@tailwind utilities;
+
+/* Importa a fonte 'Merriweather' do Google Fonts, com diferentes pesos (300, 400, 700) */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+
+/* Define a fonte global da aplicação como 'Merriweather' para todos os textos dentro do body */
+body {
+  font-family: 'Merriweather', serif!important;
+  background-color: white;/* Define a cor de fundo padrão como branca */
+  color: black;/* Define a cor do texto padrão como preta */
+}
+
+/* Define estilos para o tema escuro. Quando a classe 'dark' é aplicada ao elemento body, as seguintes regras são usadas. */
+.dark body{
+  background-color: #2c1d0c; /* Dark background */
+  color: white;/* Define a cor do texto padrão como branca */
+}
+
+/* Define o fundo da classe 'bg-gray-800' para um tom mais escuro de cinza no tema escuro. */
+.dark .bg-gray-800 {
+  background-color: #9b804e;
+}
+
+/* Define a cor do texto da classe 'text-gray-700' para branca no tema escuro. */
+.dark .text-gray-700{
+  color:white
+}
+
+/* Oculta a barra de rolagem padrão em navegadores baseados em WebKit (Chrome, Safari) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;/* Oculta a barra de rolagem no WebKit */
+}
+
+/* Oculta a barra de rolagem em navegadores como IE, Edge, e Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer e Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Ajusta o conteúdo dos botões de navegação do Slick Slider para garantir que eles não mostrem nada, resolvendo problemas visuais. */
+.slick-next:before {
+  content: ' '!important; /* Define o conteúdo como um espaço vazio e garante que o estilo seja aplicado */
+}
+.slick-prev:before {
+  content: ' '!important; /* Define o conteúdo como um espaço vazio e garante que o estilo seja aplicado */
+}
+/* styles/globals.css */
+.custom-swal-button {
+  background-color: #2c3e50 !important; /* Cor de fundo mais escura */
+  color: #ecf0f1 !important; /* Cor da fonte mais clara */
+  border: none !important; /* Remove a borda padrão */
+  padding: 10px 20px !important; /* Ajusta o padding */
+  font-size: 16px !important; /* Ajusta o tamanho da fonte */
+  border-radius: 5px !important; /* Adiciona bordas arredondadas */
+  cursor: pointer !important; /* Adiciona o ponteiro do cursor */
+}
+
+.custom-swal-button:hover {
+  background-color: #34495e !important; /* Cor de fundo ao passar o mouse */
+}
