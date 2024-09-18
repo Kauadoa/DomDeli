@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../lib/mongodb"; // Atualize para a nova conexão com MongoDB
+import { connectToDatabase } from "../../lib/mongodb"; // Atualize para a nova conexão com MongoDB
 import Order from "../../models/Order"; // Modelo de Pedido.
 import {buffer} from 'micro'; // Importa a função buffer para ler o corpo da requisição.
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Inicializa a biblioteca Stripe com a chave secreta.

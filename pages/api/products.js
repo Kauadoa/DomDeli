@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../lib/mongodb"; // Atualize para a nova conexão com MongoDB
+import { connectToDatabase } from "../../lib/mongodb"; // Atualize para a nova conexão com MongoDB
 import Product from "../../models/Product"; // Modelo de Produto.
 
 export async function findAllProducts() {
