@@ -1,11 +1,11 @@
-import {initMongoose} from "../../lib/mongoose"; // Importa a função para inicializar a conexão com o MongoDB.
+import { connectToDatabase } from "../lib/mongodb"; // Atualize para a nova conexão com MongoDB
 import Order from "../../models/Order"; // Modelo de Pedido.
 import {buffer} from 'micro'; // Importa a função buffer para ler o corpo da requisição.
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Inicializa a biblioteca Stripe com a chave secreta.
 
 // localhost:3000/api/webhook
 export default async function handler(req, res) {
-  await initMongoose(); // Conecta ao banco de dados MongoDB.
+  await connectToDatabase(); // Conecta ao banco de dados MongoDB.
   const signingSecret = 'whsec_634d3142fd2755bd61adaef74ce0504bd2044848c8aac301ffdb56339a0ca78d'; // Chave secreta do webhook.
   const payload = await buffer(req); // Lê o corpo da requisição.
   const signature = req.headers['stripe-signature']; // Obtém a assinatura do Stripe.

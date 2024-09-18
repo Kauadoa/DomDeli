@@ -1,6 +1,6 @@
 import { useState } from "react"; // Importa o hook useState do React para gerenciar o estado local do componente.
 import Product from "../components/Product"; // Importa o componente Product para exibir produtos individuais.
-import { initMongoose } from "../lib/mongoose"; // Importa a função para inicializar a conexão com o banco de dados MongoDB.
+import { connectToDatabase } from "../lib/mongodb"; // Atualize para a nova conexão com MongoDB
 import { findAllProducts } from "./api/products"; // Importa a função para buscar todos os produtos do banco de dados.
 import Layout from "../components/Layout"; // Importa o componente Layout que envolve o conteúdo da página com a estrutura de layout.
 import Slider from "react-slick"; // Importa o componente Slider para exibir produtos em um carrossel.
@@ -118,7 +118,7 @@ export default function Home({ products }) {
 
 // Função para obter dados do servidor durante o processo de renderização da página
 export async function getServerSideProps() {
-  await initMongoose(); // Inicializa a conexão com o MongoDB
+  await connectToDatabase(); // Inicializa a conexão com o MongoDB
   const products = await findAllProducts(); // Busca todos os produtos do banco de dados
   return {
     props: {

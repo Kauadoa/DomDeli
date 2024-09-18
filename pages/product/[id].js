@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { initMongoose } from "../../lib/mongoose";
+import { connectToDatabase } from "../lib/mongodb"; // Atualize para a nova conexão com MongoDB
 import Product from "../../models/Product";
 import Layout from "../../components/Layout";
 
@@ -25,7 +25,7 @@ export default function ProductPage({ product }) {
 // Função que obtém os dados do produto com base no ID da rota
 export async function getServerSideProps(context) {
   const { id } = context.params; // Obtém o ID da URL
-  await initMongoose(); // Inicializa a conexão com o MongoDB
+  await connectToDatabase(); // Inicializa a conexão com o MongoDB
   const product = await Product.findById(id).lean(); // Busca o produto no banco de dados pelo ID
 
   return {

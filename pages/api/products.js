@@ -1,4 +1,4 @@
-import {initMongoose} from "../../lib/mongoose"; // Importa a função para inicializar a conexão com o MongoDB.
+import { connectToDatabase } from "../lib/mongodb"; // Atualize para a nova conexão com MongoDB
 import Product from "../../models/Product"; // Modelo de Produto.
 
 export async function findAllProducts() {
@@ -6,7 +6,7 @@ export async function findAllProducts() {
 }
 
 export default async function handle(req, res) {
-  await initMongoose(); // Conecta ao banco de dados MongoDB.
+  await connectToDatabase(); // Conecta ao banco de dados MongoDB.
   const {ids} = req.query; // Extrai os IDs da query string.
   if (ids) {
     const idsArray = ids.split(','); // Converte a string de IDs em um array.
