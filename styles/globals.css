@@ -65,3 +65,29 @@ body {
 .custom-swal-button:hover {
   background-color: #34495e !important; /* Cor de fundo ao passar o mouse */
 }
+
+/* Estilos globais para inputs */
+input,
+textarea {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* Modo escuro */
+[data-theme='dark'] input,
+[data-theme='dark'] textarea {
+  background-color: #2d2d2d; /* Fundo escuro */
+  color: #e0e0e0; /* Texto claro */
+  border-color: #444; /* Borda mais escura */
+}
+
+/* Modo claro */
+input,
+textarea {
+  background-color: #fff; /* Fundo claro */
+  color: #333; /* Texto escuro */
+  border-color: #ccc; /* Borda clara */
+}

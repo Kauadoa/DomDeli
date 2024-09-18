@@ -46,6 +46,16 @@ export default function Home({ products }) {
 
   return (
     <Layout>
+
+      {/* Imagem/banner principal */}
+      <div className="relative mb-8 flex items-center justify-center">
+        <img 
+          src="/DomDeli.png" 
+          alt="Banner" 
+          className="w-1rem max-w-1rem h-auto object-cover rounded-lg shadow-md"
+        />
+      </div>
+
       {/* Campo de pesquisa para filtrar produtos */}
       <div className="flex items-center mb-4">
         <input 
@@ -56,16 +66,7 @@ export default function Home({ products }) {
           className="bg-gray-200 w-full py-2 px-4 rounded-xl"
         />
       </div>
-
-      {/* Imagem/banner principal */}
-      <div className="relative mb-8 flex items-center justify-center">
-        <img 
-          src="/Step Style.png" 
-          alt="Banner" 
-          className="w-1rem max-w-1rem h-auto object-cover rounded-lg shadow-md"
-        />
-      </div>
-
+      
       {/* Seção de produtos filtrados por categorias */}
       <div>
         {categoriesNames.map(categoryName => (

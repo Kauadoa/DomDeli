@@ -1,5 +1,6 @@
 // Importa a função para inicializar a conexão com o banco de dados MongoDB
-import { initMongoose } from "../../lib/mongoose";
+import { connectToDatabase } from "../../lib/mongoose"; // Atualize para a nova conexão com MongoDB
+
 // Importa o modelo de Product para interagir com a coleção de produtos no MongoDB
 import Product from "../../models/Product";
 // Importa o modelo de Order para interagir com a coleção de pedidos no MongoDB
@@ -9,7 +10,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   // Inicializa a conexão com o banco de dados MongoDB
-  await initMongoose();
+  await connectToDatabase();
 
   // Extrai dados do corpo da requisição
   const { email, name, address, city } = req.body;
