@@ -1,6 +1,6 @@
 import { useState } from "react"; // Importa o hook useState do React para gerenciar o estado local do componente.
 import Product from "../components/Product"; // Importa o componente Product para exibir produtos individuais.
-import { connectToDatabase } from "../lib/mongodb"; // Atualize para a nova conexão com MongoDB
+import { initMongoose } from "../lib/mongoose"; // Importa a função para inicializar a conexão com o banco de dados MongoDB.
 import { findAllProducts } from "./api/products"; // Importa a função para buscar todos os produtos do banco de dados.
 import Layout from "../components/Layout"; // Importa o componente Layout que envolve o conteúdo da página com a estrutura de layout.
 import Slider from "react-slick"; // Importa o componente Slider para exibir produtos em um carrossel.
@@ -46,6 +46,16 @@ export default function Home({ products }) {
 
   return (
     <Layout>
+
+      {/* Imagem/banner principal */}
+      <div className="relative mb-8 flex items-center justify-center">
+        <img 
+          src="/DomDeli.png" 
+          alt="Banner" 
+          className="w-1rem max-w-1rem h-auto object-cover rounded-lg shadow-md"
+        />
+      </div>
+
       {/* Campo de pesquisa para filtrar produtos */}
       <div className="flex items-center mb-4">
         <input 
@@ -56,16 +66,7 @@ export default function Home({ products }) {
           className="bg-gray-200 w-full py-2 px-4 rounded-xl"
         />
       </div>
-
-      {/* Imagem/banner principal */}
-      <div className="relative mb-8 flex items-center justify-center">
-        <img 
-          src="/Step Style.png" 
-          alt="Banner" 
-          className="w-1rem max-w-1rem h-auto object-cover rounded-lg shadow-md"
-        />
-      </div>
-
+      
       {/* Seção de produtos filtrados por categorias */}
       <div>
         {categoriesNames.map(categoryName => (
@@ -118,7 +119,7 @@ export default function Home({ products }) {
 
 // Função para obter dados do servidor durante o processo de renderização da página
 export async function getServerSideProps() {
-  await connectToDatabase(); // Inicializa a conexão com o MongoDB
+  await initMongoose(); // Inicializa a conexão com o MongoDB
   const products = await findAllProducts(); // Busca todos os produtos do banco de dados
   return {
     props: {

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { connectToDatabase } from '../../lib/mongodb.js'; // Atualize para a nova conexão com MongoDB
+import { connectToDatabase } from '../../lib/mongoose.js'; // Atualize para a nova conexão com MongoDB
 import Product from "../../models/Product";
 import Layout from "../../components/Layout";
 

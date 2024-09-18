@@ -1,5 +1,5 @@
 // Importa a função para inicializar a conexão com o banco de dados MongoDB
-import { connectToDatabase } from "../../lib/mongodb"; // Atualize para a nova conexão com MongoDB
+import { connectToDatabase } from "../../lib/mongoose"; // Atualize para a nova conexão com MongoDB
 
 // Importa o modelo de Product para interagir com a coleção de produtos no MongoDB
 import Product from "../../models/Product";
