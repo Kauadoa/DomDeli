@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { connectToDatabase } from '../../lib/mongoose.js'; // Atualize para a nova conexão com MongoDB
+import { initMongoose } from "../../lib/mongoose";
 import Product from "../../models/Product";
 import Layout from "../../components/Layout";
 
@@ -16,6 +16,14 @@ export default function ProductPage({ product }) {
         <img src={product.picture} alt={product.name} className="w-64 h-64 object-contain" /> {/* Imagem do produto */}
         <h1 className="text-3xl font-bold mt-4">{product.name}</h1> {/* Nome do produto */}
         <p className="text-gray-600 text-center mt-2">{product.description}</p> {/* Descrição do produto */}
+        <p className="text-gray-600 text-center mt-2">
+          <ul className="list-disc list-inside">
+            {product.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
+          {/*ingredientes do produto*/}
+        </p>
         <div className="text-2xl font-bold mt-4">R${product.price}</div> {/* Preço do produto */}
       </div>
     </Layout>
@@ -25,7 +33,7 @@ export default function ProductPage({ product }) {
 // Função que obtém os dados do produto com base no ID da rota
 export async function getServerSideProps(context) {
   const { id } = context.params; // Obtém o ID da URL
-  await connectToDatabase(); // Inicializa a conexão com o MongoDB
+  await initMongoose(); // Inicializa a conexão com o MongoDB
   const product = await Product.findById(id).lean(); // Busca o produto no banco de dados pelo ID
 
   return {

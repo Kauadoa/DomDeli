@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Layout from "../../components/Layout";
 
 export default function VerPedidos() {
   const [pedidos, setPedidos] = useState([]);
@@ -13,6 +14,8 @@ export default function VerPedidos() {
   }, []);
 
   return (
+    <>
+    <Layout title="Ver Pedidos"/>
     <div className="p-10 bg-gray-100 min-h-screen">
       <h2 className="text-3xl font-bold mb-6 text-center">Pedidos</h2>
       <div className="bg-white p-8 rounded-lg shadow-md">
@@ -36,5 +39,6 @@ export default function VerPedidos() {
         </table>
       </div>
     </div>
+    </>
   );
 }

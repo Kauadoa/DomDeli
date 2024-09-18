@@ -1,5 +1,3 @@
-// // Importa os métodos model, models e Schema do mongodb
-// import { model, models, Schema } from "mongoose";
 // Importa os métodos model, models e Schema do mongoose
 import { model, models, Schema } from "mongoose";
 

@@ -18,4 +18,33 @@ export default async function handle(req, res) {
   } else {
     res.json( await findAllProducts() ); // Se nenhum ID for fornecido, retorna todos os produtos.
   }
+  // pages/api/products.js
+
+  if (req.method === 'POST') {
+    try {
+      // Inicializa a conexão com o banco de dados
+      await initMongoose();
+
+      // Cria um novo produto com os dados recebidos
+      const { name, description, price, picture } = req.body;
+      const newProduct = new Product({
+        name,
+        description,
+        price,
+        picture,
+      });
+
+      // Salva o produto no banco de dados
+      const savedProduct = await newProduct.save();
+
+      // Retorna a resposta com o produto salvo
+      res.status(201).json(savedProduct);
+    } catch (error) {
+      console.error('Error creating product:', error);
+      res.status(500).json({ error: 'Failed to create product' });
+    }
+  } else {
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 }
