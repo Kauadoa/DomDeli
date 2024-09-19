@@ -1,6 +1,6 @@
 # DomDeli
 
-DomDeli é um projeto de aplicativo para pedidos de lanches, desenvolvido para proporcionar uma experiência de compra online simples e eficiente. O projeto foi desenvolvido em aproximadamente 3 dias por Kauã, visando fornecer uma solução prática para o gerenciamento de pedidos e itens em um ambiente de entregas.
+DomDeli é um projeto de aplicativo para pedidos de lanches, desenvolvido para proporcionar uma experiência de compra online simples e eficiente. O projeto foi desenvolvido por Kauã, visando fornecer uma solução prática para o gerenciamento de pedidos e itens em um ambiente de entregas.
 
 ## Funcionalidades
 
@@ -9,15 +9,13 @@ DomDeli é um projeto de aplicativo para pedidos de lanches, desenvolvido para p
 - **Sistema de Pagamento**: Oferece um formulário para entrada de dados de pagamento e informações de entrega.
 - **Carrossel de Itens**: Exibe os itens disponíveis em um carrossel para facilitar a visualização e a seleção.
 - **Modo Escuro**: Permite a alternância entre modos claro e escuro.
-- **Cálculo de Frete**: Calcula o subtotal, custo de entrega e total com base nos produtos selecionados e CEP do usuário.
-- **Tempo de Entrega**: Estima o tempo de entrega com base na distância e no tempo de preparo dos itens.
-
 ## Tecnologias Utilizadas
 
-- **Frontend**: React, Tailwind CSS
-- **Backend**: Express.js, MySQL
-- **Banco de Dados**: MongoDB
-- **APIs**: Google Maps API (para cálculo de distância)
+- Tailwind CSS: Biblioteca de utilitários CSS para estilização rápida e responsiva.
+- Next.js: Framework React para construção de interfaces e rotas.
+- MongoDB: Banco de dados NoSQL para armazenamento dos dados da aplicação.
+- Mongoose: Biblioteca para modelagem de objetos MongoDB no Node.js.
+
 
 ## Como Rodar o Projeto
 
@@ -25,64 +23,54 @@ DomDeli é um projeto de aplicativo para pedidos de lanches, desenvolvido para p
 
 - Node.js
 - MongoDB
-- MySQL
+- Bilbioteca Mongoose
 
-### Configuração do Backend
+### Configuração do Projeto
 
 1. Clone o repositório:
    ```bash
    git clone https://github.com/Kauadoa/DomDeli.git
-   cd DomDeli/backend
+   cd DomDeli
    ```
 
 2. Instale as dependências:
    ```bash
+   npm install autoprefixer micro mongoose next postcss react react-dom react-slick slick-carousel stripe sweetalert2 tailwind-scrollbar-hide tailwindcss use-local-storage-state
    npm install
    ```
 
 3. Crie um arquivo `.env` e configure as variáveis de ambiente (veja `.env.example` para referência):
    ```plaintext
-   MONGODB_URL=your_mongodb_connection_string
-   MYSQL_HOST=your_mysql_host
-   MYSQL_USER=your_mysql_user
-   MYSQL_PASSWORD=your_mysql_password
-   MYSQL_DATABASE=your_mysql_database
+   MONGODB_URI=your_mongodb_connection_string
+   STRIPE_PUBLIC_KEY=your_stripe_pk_key
+   STRIPE_SECRET_KEY=your_stripe_sk_key
    ```
 
 4. Inicie o servidor:
-   ```bash
-   npm start
-   ```
-
-### Configuração do Frontend
-
-1. Navegue até a pasta do frontend:
-   ```bash
-   cd ../frontend
-   ```
-
-2. Instale as dependências:
-   ```bash
-   npm install
-   ```
-
-3. Inicie o servidor de desenvolvimento:
    ```bash
    npm run dev
    ```
 
 ### Popular o Banco de Dados
 
-Um script para popular o banco de dados com produtos de exemplo pode ser encontrado na pasta `scripts`. Execute-o com:
+Uma funçao para popular o banco de dados com produtos de exemplo pode ser encontrado no arquivo `pages/index.js`. Execute-a retirando as barras de comentário:
 ```bash
-node scripts/populateDatabase.js
+  };
+
+/*função para popular banco abaixo*/
+
+// handlePopulateProducts();  // Função para popular o banco de dados. /*Retire as barras do começo esta linha de comando e recarregue a pagina inicial, volte e adicione-as novamente para funcionamento o correto do projeto*/  
+
+/*função para popular banco acima*/
+
+  // Declara um estado local para o termo de pesquisa.
+  const [phrase, setPhrase] = useState('');node scripts/populateDatabase.js
 ```
 
-## Estrutura do Projeto
+## Estrutura do Banco de Dados
 
-- `backend/` - Contém o código do servidor Express.js e configuração do banco de dados.
-- `frontend/` - Contém o código React para a interface do usuário.
-- `scripts/` - Scripts auxiliares, como o de popular o banco de dados.
+- Itens: Armazena informações sobre os itens do cardápio, incluindo nome, descrição, preço, categoria, imagem e ingredientes.
+- Pedidos: Armazena informações sobre os pedidos realizados, incluindo itens, quantidade, subtotal, valor de entrega e total.
 
 ## Contribuições
 
