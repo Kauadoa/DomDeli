@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { initMongoose } from "../../lib/mongoose";
 import Product from "../../models/Product";
@@ -9,14 +9,34 @@ import { ProductsContext } from "../../components/ProductsContext"; // Importa o
 export default function ProductPage({ product }) {
   const router = useRouter(); // Hook do Next.js para acessar informações da rota
   const { setSelectedProducts } = useContext(ProductsContext); // Acessa o contexto do carrinho
+  const [showModal, setShowModal] = useState(false); // Estado para controlar o modal
+  const [isClient, setIsClient] = useState(false); // Estado para verificar se o código está sendo executado no cliente
+
+  // useEffect para garantir que o código seja executado apenas no cliente
+  useEffect(() => {
+    setIsClient(true); // Marca que estamos no cliente
+  }, []);
 
   // Verifica se o produto foi encontrado
   if (!product) return <p>Produto não encontrado</p>;
 
-  // Função para adicionar o produto ao carrinho
+  // Função para adicionar o produto ao carrinho e exibir o modal
   function addProduct(e) {
     e.preventDefault(); // Evita o comportamento padrão de navegação
     setSelectedProducts(prev => [...prev, product._id]); // Adiciona o produto ao estado de produtos selecionados
+    setShowModal(true); // Exibe o modal de confirmação
+  }
+
+  // Função para redirecionar à página inicial
+  function goToHomePage() {
+    setShowModal(false); // Fecha o modal
+    router.push('/'); // Redireciona para a página inicial
+  }
+
+  // Função para redirecionar ao carrinho
+  function goToCartPage() {
+    setShowModal(false); // Fecha o modal
+    router.push('/cart'); // Redireciona para a página do carrinho
   }
 
   return (
@@ -54,6 +74,30 @@ export default function ProductPage({ product }) {
         >
           Adicionar ao Carrinho
         </button>
+
+        {/* Modal de confirmação (somente renderizado no cliente) */}
+        {isClient && showModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+              <h2 className="text-2xl font-bold mb-4">Produto adicionado ao carrinho!</h2>
+              <p className="mb-4">O que deseja fazer a seguir?</p>
+              <div className="flex justify-around">
+                <button
+                  onClick={goToHomePage}
+                  className="bg-blue-500 text-white py-2 px-4 rounded-lg"
+                >
+                  Voltar à Página Inicial
+                </button>
+                <button
+                  onClick={goToCartPage}
+                  className="bg-green-500 text-white py-2 px-4 rounded-lg"
+                >
+                  Revisar Carrinho
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );
