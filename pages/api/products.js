@@ -26,10 +26,12 @@ export default async function handle(req, res) {
       await initMongoose();
 
       // Cria um novo produto com os dados recebidos
-      const { name, description, price, picture } = req.body;
+      const { name, category, description, ingredients, price, picture } = req.body;
       const newProduct = new Product({
         name,
+        category,
         description,
+        ingredients,
         price,
         picture,
       });
