@@ -35,7 +35,7 @@ export default function Layout({ children }) {
         {success && (
           // Exibe uma mensagem de agradecimento se o pedido for concluído com sucesso
           <div className="mb-5 bg-green-400 text-white text-lg p-5 rounded-xl">
-            Thanks for your order!
+            Obrigado pela compra!
           </div>
         )}
         {children} {/* Renderiza o conteúdo passado como filho */}

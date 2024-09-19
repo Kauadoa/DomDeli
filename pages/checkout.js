@@ -43,18 +43,19 @@ export default function CheckoutPage() {
   }
 
   // Define o preço de entrega
-  const deliveryPrice = 5;
-  // Calcula o subtotal com base nos produtos selecionados
-  let subtotal = 0;
-  if (selectedProducts?.length) {
-    for (let id of selectedProducts) {
-      const price = productsInfos.find(p => p._id === id)?.price || 0;
-      subtotal += price;
-    }
+  const deliveryPrice = 3;
+// Calcula o subtotal com base nos produtos selecionados
+let subtotal = 0;
+if (selectedProducts?.length) {
+  for (let id of selectedProducts) {
+    const price = parseFloat(productsInfos.find(p => p._id === id)?.price) || 0;
+    subtotal += price;
   }
-  // Formata o subtotal e o total para exibição
-  const formattedSubtotal = subtotal.toFixed(2);
-  const total = (subtotal + deliveryPrice).toFixed(2);
+}
+// Formata o subtotal e o total para exibição
+const formattedSubtotal = subtotal.toFixed(2);
+const total = (subtotal + deliveryPrice).toFixed(2);
+
 
   // Função para verificar e alertar se o carrinho estiver vazio
   function handleCheckout(event) {
@@ -74,43 +75,57 @@ export default function CheckoutPage() {
 
   return (
     <Layout>
-      {/* Exibe uma mensagem se não houver produtos selecionados */}
-      {!productsInfos.length && (
-        <div>no products in your shopping cart</div>
-      )}
-      {/* Exibe informações dos produtos selecionados */}
-      {productsInfos.length && productsInfos.map(productInfo => {
-        const amount = selectedProducts.filter(id => id === productInfo._id).length;
-        if (amount === 0) return;
-        return (
-          <div className="flex mb-5 items-center" key={productInfo._id}>
-            <div className="bg-gray-100 p-3 rounded-xl shrink-0" style={{ boxShadow: 'inset 1px 0px 10px 10px rgba(0,0,0,0.1)' }}>
-              <img className="w-24" src={productInfo.picture} alt="" />
-            </div>
-            <div className="pl-4 items-center">
-              <h3 className="font-bold text-lg">{productInfo.name}</h3>
-              <div className="flex mt-1">
-                <div className="grow font-bold">${productInfo.price.toFixed(2)}</div>
-                <div>
-                  {/* Botões para ajustar a quantidade de produtos */}
-                  <button onClick={() => lessOfThisProduct(productInfo._id)} className="border border-emerald-500 px-2 rounded-lg text-emerald-500">-</button>
-                  <span className="px-2">
-                    {amount}
-                  </span>
-                  <button onClick={() => moreOfThisProduct(productInfo._id)} className="bg-emerald-500 px-2 rounded-lg text-white">+</button>
-                </div>
-              </div>
+     {/* Exibe uma mensagem se não houver produtos selecionados */}
+{!productsInfos.length && (
+  <div>Não há produtos no seu carrinho</div>
+)}
+{/* Exibe informações dos produtos selecionados */}
+<div className="flex flex-wrap -mx-2">
+  {productsInfos.length && productsInfos.map(productInfo => {
+    const amount = selectedProducts.filter(id => id === productInfo._id).length;
+    if (amount === 0) return;
+    return (
+      <div className="flex mb-5 items-center px-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4" key={productInfo._id}>
+        <div className="bg-gray-100 p-3 rounded-xl shrink-0" style={{ boxShadow: 'inset 1px 0px 10px 10px rgba(0,0,0,0.1)' }}>
+          <img className="w-24" src={productInfo.picture} alt="" />
+        </div>
+        <div className="pl-4 items-center">
+          <h3 className="font-bold text-lg">{productInfo.name}</h3>
+          <h4 className="text-gray-600 text-center mt-2">
+            {productInfo.ingredients && productInfo.ingredients.length > 0 ? (
+              <ul className="list-disc list-inside">
+                {productInfo.ingredients.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>Sem ingredientes</p>
+            )}
+          </h4>
+          <div className="flex mt-1">
+            <div className="grow font-bold">${parseFloat(productInfo.price).toFixed(2)}</div>
+            <div>
+              {/* Botões para ajustar a quantidade de produtos */}
+              <button onClick={() => lessOfThisProduct(productInfo._id)} className="border border-emerald-500 px-2 rounded-lg text-emerald-500">-</button>
+              <span className="px-2">
+                {amount}
+              </span>
+              <button onClick={() => moreOfThisProduct(productInfo._id)} className="bg-emerald-500 px-2 rounded-lg text-white">+</button>
             </div>
           </div>
-        )
-      })}
+        </div>
+      </div>
+    )
+  })}
+</div>
+
       <form action="/api/checkout" method="POST" onSubmit={handleCheckout}>
         <div className="mt-8">
           {/* Campos de entrada para endereço, cidade, nome e email */}
-          <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Número da Residência" />
-          <input name="city" value={city} onChange={e => setCity(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="CEP" />
-          <input name="name" value={name} onChange={e => setName(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Nome" />
-          <input name="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="email" placeholder="Email" />
+          <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Número da Residência" required />
+          <input name="city" value={city} onChange={e => setCity(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="CEP, deixe em branco em caso de consumir no estabelecimento" />
+          <input name="name" value={name} onChange={e => setName(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Nome" required />
+          <input name="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="email" placeholder="Email" required />
         </div>
         <div className="mt-8">
           {/* Exibe o subtotal, o preço de entrega e o total */}

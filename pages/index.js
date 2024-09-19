@@ -23,7 +23,7 @@ export default function Home({ products }) {
     dots: false, // Desativa os pontos de navegação no carrossel.
     infinite: true, // Permite rotação infinita do carrossel.
     speed: 500, // Define a velocidade de transição dos slides.
-    slidesToShow: 3, // Número de slides visíveis ao mesmo tempo.
+    slidesToShow: 4, // Número de slides visíveis ao mesmo tempo.
     swipeToSlide: true, // Permite navegação por deslizar os slides.
     touchThreshold: 15, // Número de pixels que o usuário precisa deslizar para reconhecer o toque.
     responsive: [

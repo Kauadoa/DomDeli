@@ -1,4 +1,4 @@
-import { connectToDatabase } from '../../../lib/mongoose.js';
+import { connectToDatabase } from '../../../lib/mongodb';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
