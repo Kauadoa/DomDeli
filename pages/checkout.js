@@ -106,11 +106,11 @@ const total = (subtotal + deliveryPrice).toFixed(2);
             <div className="grow font-bold">${parseFloat(productInfo.price).toFixed(2)}</div>
             <div>
               {/* Botões para ajustar a quantidade de produtos */}
-              <button onClick={() => lessOfThisProduct(productInfo._id)} className="border border-emerald-500 px-2 rounded-lg text-emerald-500">-</button>
+              <button onClick={() => lessOfThisProduct(productInfo._id)} className="border border-orange-500 px-2 rounded-lg text-orange-500">-</button>
               <span className="px-2">
                 {amount}
               </span>
-              <button onClick={() => moreOfThisProduct(productInfo._id)} className="bg-emerald-500 px-2 rounded-lg text-white">+</button>
+              <button onClick={() => moreOfThisProduct(productInfo._id)} className="bg-orange-500 px-2 rounded-lg text-white">+</button>
             </div>
           </div>
         </div>
@@ -137,7 +137,7 @@ const total = (subtotal + deliveryPrice).toFixed(2);
             <h3 className="grow font-bold text-gray-400">Entrega:</h3>
             <h3 className="font-bold">R${deliveryPrice.toFixed(2)}</h3>
           </div>
-          <div className="flex my-3 border-t pt-3 border-dashed border-emerald-500">
+          <div className="flex my-3 border-t pt-3 border-dashed border-orange-500">
             <h3 className="grow font-bold text-gray-400">Total:</h3>
             <h3 className="font-bold">R${total}</h3>
           </div>
@@ -145,7 +145,7 @@ const total = (subtotal + deliveryPrice).toFixed(2);
         {/* Campo oculto para enviar os IDs dos produtos selecionados */}
         <input type="hidden" name="products" value={selectedProducts.join(',')} />
         {/* Botão para finalizar a compra */}
-        <button type="submit" className="bg-emerald-500 px-5 py-2 rounded-xl font-bold text-white w-full my-4 shadow-emerald-300 shadow-lg">
+        <button type="submit" className="bg-orange-500 px-5 py-2 rounded-xl font-bold text-white w-full my-4 shadow-orange-300 shadow-lg">
           Finalizar Compra R${total}
         </button>
       </form>

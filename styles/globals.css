@@ -33,6 +33,11 @@ body {
   color:white
 }
 
+/* Define a cor do texto da classe 'text-gray-600' para mais clara no tema escuro. */
+.dark .text-gray-600{
+  color:rgb(201, 197, 197)
+}
+
 /* Oculta a barra de rolagem padrão em navegadores baseados em WebKit (Chrome, Safari) */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;/* Oculta a barra de rolagem no WebKit */

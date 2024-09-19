@@ -62,7 +62,7 @@ export default function Product({_id, category, name, ingredients, price, descri
       <div className="flex mt-1">
         <div className="text-2xl font-bold grow">R${price}</div>
         {/* Botão para adicionar o produto ao carrinho */}
-        <button onClick={addProduct} className="bg-emerald-400 text-white py-1 px-3 rounded-xl">
+        <button onClick={addProduct} className="bg-orange-400 text-white py-1 px-3 rounded-xl">
           +
         </button>
       </div>
