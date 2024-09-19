@@ -75,47 +75,50 @@ const total = (subtotal + deliveryPrice).toFixed(2);
 
   return (
     <Layout>
-      {/* Exibe uma mensagem se não houver produtos selecionados */}
-      {!productsInfos.length && (
-        <div>Não há produtos no seu carrinho</div>
-      )}
-      {/* Exibe informações dos produtos selecionados */}
-      {productsInfos.length && productsInfos.map(productInfo => {
-        const amount = selectedProducts.filter(id => id === productInfo._id).length;
-        if (amount === 0) return;
-        return (
-          <div className="flex mb-5 items-center" key={productInfo._id}>
-            <div className="bg-gray-100 p-3 rounded-xl shrink-0" style={{ boxShadow: 'inset 1px 0px 10px 10px rgba(0,0,0,0.1)' }}>
-              <img className="w-24" src={productInfo.picture} alt="" />
-            </div>
-            <div className="pl-4 items-center">
-              <h3 className="font-bold text-lg">{productInfo.name}</h3>
-              <h4 className="text-gray-600 text-center mt-2">
-                {productInfo.ingredients && productInfo.ingredients.length > 0 ? (
-                  <ul className="list-disc list-inside">
-                    {productInfo.ingredients.map((ingredient, index) => (
-                      <li key={index}>{ingredient}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>Sem ingredientes</p>
-                )}
-              </h4>
-              <div className="flex mt-1">
-                <div className="grow font-bold">${parseFloat(productInfo.price).toFixed(2)}</div>
-                <div>
-                  {/* Botões para ajustar a quantidade de produtos */}
-                  <button onClick={() => lessOfThisProduct(productInfo._id)} className="border border-emerald-500 px-2 rounded-lg text-emerald-500">-</button>
-                  <span className="px-2">
-                    {amount}
-                  </span>
-                  <button onClick={() => moreOfThisProduct(productInfo._id)} className="bg-emerald-500 px-2 rounded-lg text-white">+</button>
-                </div>
-              </div>
+     {/* Exibe uma mensagem se não houver produtos selecionados */}
+{!productsInfos.length && (
+  <div>Não há produtos no seu carrinho</div>
+)}
+{/* Exibe informações dos produtos selecionados */}
+<div className="flex flex-wrap -mx-2">
+  {productsInfos.length && productsInfos.map(productInfo => {
+    const amount = selectedProducts.filter(id => id === productInfo._id).length;
+    if (amount === 0) return;
+    return (
+      <div className="flex mb-5 items-center px-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4" key={productInfo._id}>
+        <div className="bg-gray-100 p-3 rounded-xl shrink-0" style={{ boxShadow: 'inset 1px 0px 10px 10px rgba(0,0,0,0.1)' }}>
+          <img className="w-24" src={productInfo.picture} alt="" />
+        </div>
+        <div className="pl-4 items-center">
+          <h3 className="font-bold text-lg">{productInfo.name}</h3>
+          <h4 className="text-gray-600 text-center mt-2">
+            {productInfo.ingredients && productInfo.ingredients.length > 0 ? (
+              <ul className="list-disc list-inside">
+                {productInfo.ingredients.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>Sem ingredientes</p>
+            )}
+          </h4>
+          <div className="flex mt-1">
+            <div className="grow font-bold">${parseFloat(productInfo.price).toFixed(2)}</div>
+            <div>
+              {/* Botões para ajustar a quantidade de produtos */}
+              <button onClick={() => lessOfThisProduct(productInfo._id)} className="border border-emerald-500 px-2 rounded-lg text-emerald-500">-</button>
+              <span className="px-2">
+                {amount}
+              </span>
+              <button onClick={() => moreOfThisProduct(productInfo._id)} className="bg-emerald-500 px-2 rounded-lg text-white">+</button>
             </div>
           </div>
-        )
-      })}
+        </div>
+      </div>
+    )
+  })}
+</div>
+
       <form action="/api/checkout" method="POST" onSubmit={handleCheckout}>
         <div className="mt-8">
           {/* Campos de entrada para endereço, cidade, nome e email */}
