@@ -15,10 +15,11 @@ export default function Header() {
 
   return (
     <header
-      className={`p-5 w-full flex justify-between items-center border-b ${
-        darkMode ? 'bg-gray-800 border-gray-600 text-gray-300' : 'bg-white border-gray-200 text-gray-400'
-      }`}
-    >
+  className={`sticky top-0 left-0 right-0 p-5 w-full flex justify-between items-center border-b ${
+    darkMode ? 'bg-gray-800 border-gray-600 text-gray-300' : 'bg-white border-gray-200 text-gray-400'
+  } z-50`}
+  style={{ zIndex: 1000 }}
+>
       <div className="flex space-x-12">
         <Link href={'/'}>
           <a className={`${path === '/' ? 'text-emerald-500' : ''} flex flex-col items-center`}>
