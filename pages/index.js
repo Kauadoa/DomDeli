@@ -6,7 +6,24 @@ import Layout from "../components/Layout"; // Importa o componente Layout que en
 import Slider from "react-slick"; // Importa o componente Slider para exibir produtos em um carrossel.
 import Link from "next/link"; // Importa o Link do Next.js para navegação entre páginas.
 
+
 export default function Home({ products }) {
+  const handlePopulateProducts = async () => {
+    try {
+      const response = await fetch("/api/populate", {
+        method: "POST",
+      });
+      if (response.ok) {
+        console.log("Produtos inseridos com sucesso!");
+      } else {
+        console.error("Erro ao inserir produtos.");
+      }
+    } catch (error) {
+      console.error("Erro:", error);
+    }
+  };
+// handlePopulateProducts();  // Função para popular o banco de dados.  
+ 
   // Declara um estado local para o termo de pesquisa.
   const [phrase, setPhrase] = useState('');
 
@@ -107,10 +124,10 @@ export default function Home({ products }) {
         </div>
         <div className="mt-6 text-sm text-center">
           Os preços, promoções, condições de pagamento, frete e produtos são válidos exclusivamente para compras realizadas via internet.
-          Fotos meramente ilustrativas. Copyright © 2003-2024 - step-style.com Todos os direitos reservados. 
+          Fotos meramente ilustrativas. Copyright © 2003-2024 - DomDeli.com Todos os direitos reservados. 
           Este site é meramente educacional, criado para fins educativos e demonstração de práticas de programação. 
-          SBF COMERCIO DE PRODUTOS ESPORTIVOS S.A. CNPJ: 00.000.000/0000-00.
-          Endereço: Cidade de Cataguases - MG, CEP 00000 - 000.
+          DOMDELI COMERCIO DE PRODUTOS ALIMENTÍCIOS S.A.{"(MEI)"} CNPJ: 00.000.000/0000-00.
+          Endereço: Cidade de Cataguases - MG, CEP 36770 - 001.
         </div>
       </div>
     </Layout>

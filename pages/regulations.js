@@ -41,7 +41,7 @@ export default function Regulations() {
         <p>
           Para quaisquer dúvidas ou preocupações relacionadas a estes
           regulamentos, entre em contato conosco através do formulário de
-          contato disponível em nosso site pelo StepStyleSac.
+          contato via E-mail disponível em nosso site pelo DomDeli.
         </p>
       </div>
     </>
