@@ -44,17 +44,18 @@ export default function CheckoutPage() {
 
   // Define o preço de entrega
   const deliveryPrice = 5;
-  // Calcula o subtotal com base nos produtos selecionados
-  let subtotal = 0;
-  if (selectedProducts?.length) {
-    for (let id of selectedProducts) {
-      const price = productsInfos.find(p => p._id === id)?.price || 0;
-      subtotal += price;
-    }
+// Calcula o subtotal com base nos produtos selecionados
+let subtotal = 0;
+if (selectedProducts?.length) {
+  for (let id of selectedProducts) {
+    const price = parseFloat(productsInfos.find(p => p._id === id)?.price) || 0;
+    subtotal += price;
   }
-  // Formata o subtotal e o total para exibição
-  const formattedSubtotal = subtotal.toFixed(2);
-  const total = (subtotal + deliveryPrice).toFixed(2);
+}
+// Formata o subtotal e o total para exibição
+const formattedSubtotal = subtotal.toFixed(2);
+const total = (subtotal + deliveryPrice).toFixed(2);
+
 
   // Função para verificar e alertar se o carrinho estiver vazio
   function handleCheckout(event) {
@@ -76,7 +77,7 @@ export default function CheckoutPage() {
     <Layout>
       {/* Exibe uma mensagem se não houver produtos selecionados */}
       {!productsInfos.length && (
-        <div>no products in your shopping cart</div>
+        <div>Não há produtos no seu carrinho</div>
       )}
       {/* Exibe informações dos produtos selecionados */}
       {productsInfos.length && productsInfos.map(productInfo => {
@@ -89,8 +90,19 @@ export default function CheckoutPage() {
             </div>
             <div className="pl-4 items-center">
               <h3 className="font-bold text-lg">{productInfo.name}</h3>
+              <h4 className="text-gray-600 text-center mt-2">
+                {productInfo.ingredients && productInfo.ingredients.length > 0 ? (
+                  <ul className="list-disc list-inside">
+                    {productInfo.ingredients.map((ingredient, index) => (
+                      <li key={index}>{ingredient}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Sem ingredientes</p>
+                )}
+              </h4>
               <div className="flex mt-1">
-                <div className="grow font-bold">${productInfo.price.toFixed(2)}</div>
+                <div className="grow font-bold">${parseFloat(productInfo.price).toFixed(2)}</div>
                 <div>
                   {/* Botões para ajustar a quantidade de produtos */}
                   <button onClick={() => lessOfThisProduct(productInfo._id)} className="border border-emerald-500 px-2 rounded-lg text-emerald-500">-</button>
@@ -108,7 +120,7 @@ export default function CheckoutPage() {
         <div className="mt-8">
           {/* Campos de entrada para endereço, cidade, nome e email */}
           <input name="address" value={address} onChange={e => setAddress(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Número da Residência" />
-          <input name="city" value={city} onChange={e => setCity(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="CEP" />
+          <input name="city" value={city} onChange={e => setCity(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="CEP, deixe em branco em caso de consumir no estabelecimento" />
           <input name="name" value={name} onChange={e => setName(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="text" placeholder="Nome" />
           <input name="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-gray-100 w-full rounded-lg px-4 py-2 mb-2" type="email" placeholder="Email" />
         </div>

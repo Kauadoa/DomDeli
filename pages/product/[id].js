@@ -34,9 +34,9 @@ export default function ProductPage({ product }) {
   }
 
   // Função para redirecionar ao carrinho
-  function goToCartPage() {
+  function goToCheckoutPage() {
     setShowModal(false); // Fecha o modal
-    router.push('/cart'); // Redireciona para a página do carrinho
+    router.push('/checkout'); // Redireciona para a página do carrinho
   }
 
   return (
@@ -89,7 +89,7 @@ export default function ProductPage({ product }) {
                   Continuar Comprando
                 </button>
                 <button
-                  onClick={goToCartPage}
+                  onClick={goToCheckoutPage}
                   className="bg-green-500 text-white py-2 px-4 rounded-lg"
                 >
                   Revisar Carrinho

@@ -5,7 +5,8 @@ import { model, models, Schema } from "mongoose";
 const ProductSchema = new Schema({
   name: String, // Nome do produto
   description: String, // Descrição do produto
-  price: Number, // Preço do produto
+  price: String, // Preço do produto
+  ingredients: Array, //ingredientes do produto
   category: String, // Categoria do produto
   picture: String, // URL da imagem do produto
 });
