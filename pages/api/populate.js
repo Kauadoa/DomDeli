@@ -51,7 +51,7 @@ const products = [
     description: "Pizza com molho de tomate, mozzarella e calabresa.",
     ingredients: ["Tomate", "Mozzarella", "Calabresa", "Cebola"],
     price: 52.99,
-    picture: "https://pixnio.com/pt/etiqueta/pizza-de-calabresa"
+    picture: "https://almadossabores.com/wp-content/uploads/2023/08/Pizza-de-Calabresa-1.webp"
   },
   {
     name: "Pizza Veggie",
@@ -75,7 +75,7 @@ const products = [
     description: "Pizza com quatro tipos de queijos.",
     ingredients: ["Tomate", "Mozzarella", "Parmesão", "Gorgonzola", "Fontina"],
     price: 62.99,
-    picture: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Four_Cheese_Pizza.jpg"
+    picture: "https://3delicias.seupedidocerto.com.br/_core/_uploads/253/2024/05/1200110524bgjaekjjd9.jpeg"
   },
   {
     name: "Pizza Portuguesa",
