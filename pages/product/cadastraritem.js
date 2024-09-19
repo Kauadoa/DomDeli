@@ -76,7 +76,7 @@ export default function CadastrarItem() {
   return (
     <>
       <Layout title="Cadastrar Item" />
-      <div className="p-10 bg-gray-100 min-h-screen">
+      <div className="body p-10 bg-gray-100 min-h-screen">
         <h2 className="text-3xl font-bold mb-6 text-center">Cadastrar Item</h2>
         {/* Exibir mensagem de sucesso */}
         {successMessage && (
@@ -171,7 +171,7 @@ export default function CadastrarItem() {
             </div>
             <button
               type="submit"
-              className="w-full bg-emerald-500 text-white p-2 rounded-lg"
+              className="w-full bg-orange-500 text-white p-2 rounded-lg"
             >
               Cadastrar
             </button>
@@ -200,7 +200,7 @@ export default function CadastrarItem() {
                   <li key={idx} className="text-gray-600">{ing.trim()}</li>
                 ))}
               </ul>
-              <p className="text-emerald-500 font-bold">R$ {price || "0,00"}</p>
+              <p className="text-orange-500 font-bold">R$ {price || "0,00"}</p>
             </div>
           </div>
         </div>

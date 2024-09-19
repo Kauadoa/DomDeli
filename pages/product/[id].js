@@ -70,7 +70,7 @@ export default function ProductPage({ product }) {
         {/* Botão para adicionar ao carrinho */}
         <button
           onClick={addProduct}
-          className="bg-emerald-400 text-white py-2 px-4 rounded-xl mt-4"
+          className="bg-orange-400 text-white py-2 px-4 rounded-xl mt-4"
         >
           Adicionar ao Carrinho
         </button>

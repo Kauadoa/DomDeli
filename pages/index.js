@@ -110,16 +110,16 @@ export default function Home({ products }) {
       <div className="mt-10 p-4 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
         <div className="flex justify-around flex-wrap text-center">
           <Link href="/privacy-policy">
-            <a className="hover:text-emerald-500">Política de Privacidade</a>
+            <a className="hover:text-orange-500">Política de Privacidade</a>
           </Link>
           <Link href="/regulations">
-            <a className="hover:text-emerald-500">Regulamentos</a>
+            <a className="hover:text-orange-500">Regulamentos</a>
           </Link>
           <Link href="/faq">
-            <a className="hover:text-emerald-500">Dúvidas Frequentes</a>
+            <a className="hover:text-orange-500">Dúvidas Frequentes</a>
           </Link>
           <Link href="/terms-conditions">
-            <a className="hover:text-emerald-500">Termos e Condições</a>
+            <a className="hover:text-orange-500">Termos e Condições</a>
           </Link>
         </div>
         <div className="mt-6 text-sm text-center">

@@ -22,7 +22,7 @@ export default function Header() {
 >
       <div className="flex space-x-12">
         <Link href={'/'}>
-          <a className={`${path === '/' ? 'text-emerald-500' : ''} flex flex-col items-center`}>
+          <a className={`${path === '/' ? 'text-orange-400' : ''} flex flex-col items-center`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -41,7 +41,7 @@ export default function Header() {
           </a>
         </Link>
         <Link href={'/checkout'}>
-          <a className={`${path === '/checkout' ? 'text-emerald-500' : ''} flex flex-col items-center`}>
+          <a className={`${path === '/checkout' ? 'text-orange-400' : ''} flex flex-col items-center`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
