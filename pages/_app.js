@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
         <ChatraWidget /> {/* Widget de chat */}
         <Head>
           <title>DomDeli</title> {/* Título da página */}
-          <link rel="icon" href="/Step Style.png" /> {/* Favicon */}
+          <link rel="icon" href="/DomDeli.png" /> {/* Favicon */}
         </Head>
         <Component {...pageProps} /> {/* Componente da página específica */}
       </ProductsContextProvider>
