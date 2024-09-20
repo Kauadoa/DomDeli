@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
+    "cookie": "^0.6.0",
+    "formidable": "^3.5.1",
+    "jsonwebtoken": "^9.0.2",
     "micro": "^9.4.1",
     "mongodb": "^6.9.0",
     "mongoose": "^6.13.2",

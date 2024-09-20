@@ -35,7 +35,7 @@ DomDeli é um projeto de aplicativo para pedidos de lanches, desenvolvido para p
 
 2. Instale as dependências:
    ```bash
-   npm install autoprefixer micro mongoose next postcss react react-dom react-slick slick-carousel stripe sweetalert2 tailwind-scrollbar-hide tailwindcss use-local-storage-state
+   npm install autoprefixer micro mongoose next postcss react react-dom react-slick slick-carousel stripe sweetalert2 multer formidable tailwind-scrollbar-hide tailwindcss use-local-storage-state
    npm install
    ```
 
