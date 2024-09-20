@@ -10,6 +10,7 @@ export default function withAuth(Component) {
     useEffect(() => {
       // Se o usuário não estiver autenticado, redireciona para a página de login
       if (!isAuthenticated) {
+        localStorage.setItem('redirectUrl', window.location.href);
         router.push('/login');
       }
     }, [isAuthenticated, router]);

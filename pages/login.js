@@ -26,7 +26,7 @@ export default function Login() {
       login(data.token);
 
       // Redireciona para a URL armazenada ou para a página padrão
-      const redirectUrl = localStorage.getItem('redirectUrl') || '/';
+      const redirectUrl = localStorage.getItem('redirectUrl');
       localStorage.removeItem('redirectUrl');
       router.push(redirectUrl);
     } else {

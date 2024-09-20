@@ -97,11 +97,14 @@ export default function Header() {
           </svg>
           <span>{darkMode ? 'Modo Claro' : 'Modo Escuro'}</span>
         </div>
+          <Link href="/product/ver-pedidos">
+            <a className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Ver Pedidos</a>
+          </Link>
           <Link href="/product/cadastraritem">
             <a className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Cadastrar Itens</a>
           </Link>
-          <Link href="/product/ver-pedidos">
-            <a className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Ver Pedidos</a>
+          <Link href="/product/editproducts">
+            <a className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Gerenciar Itens</a>
           </Link>
           <button onClick={logout} className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">
             Sair
