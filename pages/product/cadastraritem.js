@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Layout from "../../components/Layout";
+import withAuth from "../../components/withAuth"; // Importa o HOC
 
-export default function CadastrarItem() {
+function CadastrarItem() {
   const [name, setNome] = useState("");
   const [category, setCategoria] = useState("");
   const [description, setDescricao] = useState("");
@@ -208,3 +209,4 @@ export default function CadastrarItem() {
     </>
   );
 }
+export default withAuth(CadastrarItem);

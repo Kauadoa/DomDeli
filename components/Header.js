@@ -3,13 +3,16 @@ import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { ProductsContext } from "./ProductsContext";
 import { DarkModeContext } from "./DarkModeContext";
+import {AuthContext} from '../components/AuthContext';
 
 export default function Header() {
   const router = useRouter();
   const path = router.pathname;
+  const { logout } = useContext(AuthContext);
   const { selectedProducts } = useContext(ProductsContext);
   const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
   const [showMenu, setShowMenu] = useState(false); // Estado para mostrar/ocultar o menu
+  
 
   const toggleMenu = () => setShowMenu(!showMenu);
 
@@ -100,6 +103,9 @@ export default function Header() {
           <Link href="/product/ver-pedidos">
             <a className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Ver Pedidos</a>
           </Link>
+          <button onClick={logout} className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">
+            Sair
+          </button>
         </div>
       )}
         </div>
