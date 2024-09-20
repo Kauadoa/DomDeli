@@ -65,6 +65,7 @@ export default async function handle(req, res) {
 
   if (req.method === 'GET') {
     const { ids } = req.query; // Extrai os IDs da query string.
+
     if (ids) {
       const idsArray = ids.split(','); // Converte a string de IDs em um array.
       res.json(
@@ -73,7 +74,9 @@ export default async function handle(req, res) {
         }).exec()
       );
     } else {
-      res.json(await findAllProducts()); // Se nenhum ID for fornecido, retorna todos os produtos.
+      // Caso não haja `ids`, retorna todos os produtos
+      const allProducts = await findAllProducts();
+      res.json(allProducts); // Retorna todos os produtos
     }
   } 
   

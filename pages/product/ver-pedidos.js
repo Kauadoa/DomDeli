@@ -5,20 +5,20 @@ import withAuth from "../../components/withAuth"; // Importa o HOC
 function VerPedidos() {
   const [pedidos, setPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Função para buscar pedidos da API
     const fetchPedidos = async () => {
       try {
         const response = await fetch('/api/get-orders');
-        if (response.ok) {
-          const data = await response.json();
-          setPedidos(data);
-        } else {
-          console.error("Erro ao buscar pedidos:", response.statusText);
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar pedidos: ${response.statusText}`);
         }
+        const data = await response.json();
+        setPedidos(data);
       } catch (error) {
-        console.error("Erro ao buscar pedidos:", error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -29,6 +29,10 @@ function VerPedidos() {
 
   if (loading) {
     return <p>Carregando pedidos...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
 
   if (!pedidos.length) {
@@ -51,7 +55,9 @@ function VerPedidos() {
             <tbody>
               {pedidos.map((pedido) => (
                 <tr key={pedido._id} className="border-b">
-                  <td className="p-2">{pedido.products.map(p => p.price_data?.product_data?.name || 'Nome não disponível').join(', ')}</td>
+                  <td className="p-2">
+                    {pedido.products.map(p => p.price_data?.product_data?.name || 'Nome não disponível').join(', ')}
+                  </td>
                   <td className="p-2">{pedido.products.length}</td>
                   <td className="p-2">{pedido.paid ? 'Pago' : 'Pendente'}</td>
                 </tr>

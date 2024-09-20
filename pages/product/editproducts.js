@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import withAuth from '../../components/withAuth';
+import { findAllProducts } from '../api/products';
 function ProductsAdmin() {
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -8,12 +9,21 @@ function ProductsAdmin() {
   // Função para buscar todos os produtos
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch('/api/products');
-      setProducts(response.data);
+      try {
+        const response = await fetch('/api/products');
+        if (!response.ok) {
+          throw new Error('Erro ao buscar produtos: ' + response.statusText);
+        }
+        const data = await response.json();
+        setProducts(data); // Aqui você define os produtos diretamente
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      }
     }
-
+  
     fetchProducts();
   }, []);
+  
 
   // Função para editar o produto
   const handleEdit = (product) => {
@@ -24,59 +34,54 @@ function ProductsAdmin() {
   // Função para salvar as alterações
   const handleSave = async () => {
     try {
-        // Fazendo a solicitação PUT para atualizar o produto
-        const putResponse = await fetch('/api/products', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(editedProduct)
-        });
-      
-        if (!putResponse.ok) {
-          throw new Error('Erro ao atualizar o produto: ' + putResponse.statusText);
-        }
-      
-        setEditingProduct(null);
-      
-        // Fazendo a solicitação GET para obter a lista atualizada de produtos
-        const getResponse = await fetch('/api/products');
-        
-        if (!getResponse.ok) {
-          throw new Error('Erro ao obter a lista de produtos: ' + getResponse.statusText);
-        }
-      
-        const data = await getResponse.json();
-        setProducts(data); // Atualiza a lista após a edição
-      } catch (error) {
-        console.error('Erro ao salvar o produto', error);
+      const putResponse = await fetch('/api/products', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editedProduct),
+      });
+  
+      if (!putResponse.ok) {
+        throw new Error('Erro ao atualizar o produto: ' + putResponse.statusText);
       }
-      
+  
+      setEditingProduct(null);
+  
+      const updatedProduct = await putResponse.json();
+      // Atualiza a lista de produtos com o produto editado
+      setProducts(products.map((product) => 
+        product._id === updatedProduct._id ? updatedProduct : product
+      ));
+    } catch (error) {
+      console.error('Erro ao salvar o produto', error);
+    }
   };
+  
 
   // Função para excluir um produto
-  const handleDelete = async (id) => {
+const handleDelete = async (id) => {
     try {
-        // Fazendo a solicitação DELETE para excluir o produto
-        const deleteResponse = await fetch('/api/products', {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ id })
-        });
-      
-        if (!deleteResponse.ok) {
-          throw new Error('Erro ao excluir o produto: ' + deleteResponse.statusText);
-        }
-      
-        // Atualiza a lista de produtos após a exclusão
-        setProducts(products.filter((product) => product._id !== id));
-      } catch (error) {
-        console.error('Erro ao excluir o produto', error);
+      // Fazendo a solicitação DELETE para excluir o produto
+      const deleteResponse = await fetch('/api/products', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
+  
+      if (!deleteResponse.ok) {
+        throw new Error('Erro ao excluir o produto: ' + deleteResponse.statusText);
       }
-      
+  
+      // Atualiza a lista de produtos após a exclusão
+      setProducts(products.filter((product) => product._id !== id));
+    } catch (error) {
+      console.error('Erro ao excluir o produto', error);
+    }
   };
+  
 
   return (
     <div>
